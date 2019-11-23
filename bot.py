@@ -86,9 +86,7 @@ def tomorrow(update, context):
     updater.bot.send_message(update.message.chat.id, schedule)
     print(update.message.chat.id)
 
-def update(update, context):
-    calen.update()
-    updater.bot.send_message(update.message.chat.id, 'сделал')
+
 
 
 
@@ -125,7 +123,6 @@ def main():
     dp.add_handler(CommandHandler("tomorrow", tomorrow))
     dp.add_handler(CommandHandler("week", week))
     dp.add_handler(CommandHandler("nextweek", nextweek))
-    dp.add_handler(CommandHandler("update", update))
     time.sleep(1)
 
     # log all errors
