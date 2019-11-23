@@ -4,9 +4,6 @@
     <list default="true" id="d3909d21-7bc9-46e5-b8bf-7d43606a145a" name="Default Changelist" comment="2 commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cal_setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/cal_setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/list_events.py" beforeDir="false" afterPath="$PROJECT_DIR$/list_events.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/token.pickle" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

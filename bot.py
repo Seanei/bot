@@ -70,20 +70,25 @@ def ansno(update, context):
     updater.bot.send_sticker(update.message.chat.id, open('photo-2019-10-29-21-37-37.jpg','rb'))
 
 def week(update, context):
-    m=calen.week()
-    updater.bot.send_message(update.message.chat.id, m)
+    if str(update.message.chat.id) =='-297571955' or update.message.chat.id > 0:
+        m=calen.week()
+        updater.bot.send_message(update.message.chat.id, m)
 
 def nextweek(update, context):
-    m=calen.nextweek()
-    updater.bot.send_message(update.message.chat.id, m)
+    if str(update.message.chat.id) =='-297571955' or update.message.chat.id > 0:
+        m=calen.nextweek()
+        updater.bot.send_message(update.message.chat.id, m)
 
 def today(update, context):
-    schedule = calen.today()
-    updater.bot.send_message(update.message.chat.id, schedule)
+    if str(update.message.chat.id) == '-297571955' or update.message.chat.id > 0:
+        schedule = calen.today()
+        updater.bot.send_message(update.message.chat.id, schedule)
     print(update.message.chat.id)
 def tomorrow(update, context):
-    schedule = calen.tomorrow()
-    updater.bot.send_message(update.message.chat.id, schedule)
+    if str(update.message.chat.id) =='-297571955' or update.message.chat.id > 0:
+
+        schedule = calen.tomorrow()
+        updater.bot.send_message(update.message.chat.id, schedule)
     print(update.message.chat.id)
 
 
