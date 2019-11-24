@@ -3,6 +3,7 @@
 import telegram;
 import time
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, BaseFilter
+from telegram import Location
 import datetime
 # Enable logging
 import random as rand
@@ -11,32 +12,7 @@ import list_events as calen
 global pollid
 pollid = {}
 global sched
-sched = {'0': ['9:00-10:30 Adaptive and Array Signal Processing, LdV-Bau \n'
-               '13:15-14:45 Sprachkurs, Ernst-Abbe-Zentrum (Lupa) \n'
-               '15:00-16:30 Audio Coding, Kirchoffbau (2002B) \n'
-               '16:45-18:15 Systems Optimization, Humboldtbau (211/212)\n',
-               '13:00-14:30 Systems Optimization, Humboldtbau (211)\n'
-               '15:00-16-30 Audio Coding, Humboldtbau (010)\n'
-               '19:00-20:30 Adaptive and Array Signal Processing, LdV-Bau\n',
-               '9:00-10:30 Measurements in Communications, Humboldtbau (012)\n'
-               '13:00-14:30 Sprachkurs, Ernst-Abbe-Zentrum (Lupa)\n',
-               '12:45-16:45 Cellular Communication Systems,  Humboldtbau (012) \n',
-               '13:00-14:30 Adaptive and Array Signal Processing, Helmholtzbau (1520b)',
-               'chill',
-               'chill'],
-         '1':['9:00-10:30 Adaptive and Array Signal Processing, LdV-Bau \n'
-               '13:00-14:30 Sprachkurs \n'
-               '15:00-16:30 Audio Coding, Kirchoffbau(2002B) \n'
-               '16:45-18:15 Systems Optimization, Humboldtbau (211/212)\n',
-               '13:00-14:30 Systems Optimization, Humboldtbau (211)\n'
-               '19:00-20:30 Adaptive and Array Signal Processing, LdV-Bau\n',
-               '9:00-10:30 Measurements in Communications, Humboldtbau (012)\n'
-               '11:00-12:30 Measurements in Communications, Humboldtbau (010)\n'
-               '13:00-14:30 Sprachkurs, Ernst-Abbe-Zentrum (Lupa)\n',
-              '12:45-16:45 Cellular Communication Systems,  Humboldtbau (012) \n',
-               'chill',
-               'chill',
-               'chill']}
+
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
@@ -66,9 +42,7 @@ def answer(update, context):
         updater.bot.send_message(update.message.chat.id, 'ну хуй знает, ' + update.message.from_user.first_name)
 
 def ansno(update, context):
-    print(update.message.chat.id)
     updater.bot.send_sticker(update.message.chat.id, open('photo-2019-10-29-21-37-37.jpg','rb'))
-
 def week(update, context):
     if str(update.message.chat.id) =='-297571955' or update.message.chat.id > 0:
         m=calen.week()
@@ -83,18 +57,14 @@ def today(update, context):
     if str(update.message.chat.id) == '-297571955' or update.message.chat.id > 0:
         schedule = calen.today()
         updater.bot.send_message(update.message.chat.id, schedule)
-    print(update.message.chat.id)
 def tomorrow(update, context):
     if str(update.message.chat.id) =='-297571955' or update.message.chat.id > 0:
 
         schedule = calen.tomorrow()
         updater.bot.send_message(update.message.chat.id, schedule)
-    print(update.message.chat.id)
 
-
-
-
-
+#def loc(update,context):
+    #coord = (float(update.message.location.latitude), float(update.message.location.longitude))
 
 class nche(BaseFilter):
     def filter(self, message):
@@ -114,7 +84,6 @@ def main():
 
     nuche = nche()
     answ =ans()
-
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
@@ -128,6 +97,7 @@ def main():
     dp.add_handler(CommandHandler("tomorrow", tomorrow))
     dp.add_handler(CommandHandler("week", week))
     dp.add_handler(CommandHandler("nextweek", nextweek))
+    #dp.add_handler(MessageHandler(Filters.location, loc))
     time.sleep(1)
 
     # log all errors
