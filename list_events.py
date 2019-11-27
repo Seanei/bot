@@ -29,7 +29,7 @@ def update(now, end):
             ls[dayOfWeek] = (start[11:-9] + ', ' + event['summary']) + ', ' + place + ', ' + room + '\n'
     return ls
 def today():
-    now = datetime.datetime.utcnow() - datetime.timedelta(hours=int(datetime.datetime.utcnow().hour), days=(int(datetime.datetime.utcnow().weekday()) + 1))
+    now = datetime.datetime.utcnow() - datetime.timedelta(hours=int(datetime.datetime.utcnow().hour))
     end = now + datetime.timedelta(days=1)
     ls = update(now, end)
 
