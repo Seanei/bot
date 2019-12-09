@@ -36,7 +36,7 @@ def answer(update, context):
 
     if str(update.message.from_user.id) == '629888988' and str(update.message.chat.id) == '-297571955':
         updater.bot.send_message(update.message.chat.id, 'ну хуй знает, зуфар')
-    elif rand.random() > 0.7 and (str(update.message.chat.id) == '-388998239' or str(update.message.chat.id) == '-318580374'or str(update.message.chat.id) == '-388998239'):
+    elif (rand.random() > 0.8 and (str(update.message.chat.id) == '-388998239' or str(update.message.chat.id) == '-318580374'or str(update.message.chat.id) == '-388998239')) or str(update.message.chat.id) == "384580876":
         updater.bot.send_message(update.message.chat.id, 'ну хуй знает, ' + update.message.from_user.first_name)
 
 def ansno(update, context):
@@ -52,7 +52,6 @@ def nextweek(update, context):
         updater.bot.send_message(update.message.chat.id, m)
 
 def today(update, context):
-    print(update.message.chat.id)
     if str(update.message.chat.id) == '-297571955' or update.message.chat.id > 0:
         schedule = calen.today()
         updater.bot.send_message(update.message.chat.id, schedule)
