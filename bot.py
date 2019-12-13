@@ -13,7 +13,7 @@ import list_events as calen
 global pollid
 pollid = {}
 
-pickle.dump(datetime.datetime.today() - datetime.timedelta(minutes=5),open('dat.bin', 'wb'))
+pickle.dump(datetime.datetime.today() - datetime.timedelta(days=5),open('dat.bin', 'wb'))
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
@@ -42,7 +42,7 @@ def answer(update, context):
     elif len(update.message.text)>=30 and (str(update.message.chat.id)=='-388998239' or str(update.message.chat.id) == '-318580374'):
         date = datetime.datetime.today()
         date1 = pickle.load(open('dat.bin', 'rb'))
-        if date-date1 >= datetime.timedelta(minutes=3) and rand.random() > 0.85:
+        if date-date1 >= datetime.timedelta(days=3) and rand.random() > 0.85:
 
             updater.bot.send_message(update.message.chat.id, 'ну такое себе')
             pickle.dump(date,open('dat.bin', 'wb'))
@@ -70,7 +70,9 @@ def tomorrow(update, context):
 
         schedule = calen.tomorrow()
         updater.bot.send_message(update.message.chat.id, schedule)
-
+def clear(update, context):
+    pickle.dump(datetime.datetime.today() - datetime.timedelta(days=5), open('dat.bin', 'wb'))
+    updater.bot.send_message(update.message.chat.id, 'ок')
 #def loc(update,context):
     #coord = (float(update.message.location.latitude), float(update.message.location.longitude))
 
@@ -105,7 +107,7 @@ def main():
     dp.add_handler(CommandHandler("tomorrow", tomorrow))
     dp.add_handler(CommandHandler("week", week))
     dp.add_handler(CommandHandler("nextweek", nextweek))
-
+    dp.add_handler(CommandHandler("clear", clear))
     #dp.add_handler(MessageHandler(Filters.location, loc))
     time.sleep(1)
 
