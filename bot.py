@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import telegram;
 import time
+import pickle
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, BaseFilter
 from telegram import Location
 import datetime
@@ -11,8 +12,8 @@ import list_events as calen
 
 global pollid
 pollid = {}
-global sched
 
+pickle.dump(datetime.datetime.today() - datetime.timedelta(minutes=5),open('dat.bin', 'wb'))
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
@@ -33,11 +34,20 @@ def end(update,context):
         updater.bot.send_sticker(update.message.chat.id, open('photo-2019-10-29-21-37-37.jpg','rb'))
 
 def answer(update, context):
+    if '?' in update.message.text.lower():
+        if str(update.message.from_user.id) == '629888988' and str(update.message.chat.id) == '-297571955':
+            updater.bot.send_message(update.message.chat.id, 'ну хуй знает, зуфар')
+        elif (rand.random() > 0.9 and ((str(update.message.chat.id) == '-388998239' or str(update.message.chat.id) == '-318580374'or str(update.message.chat.id) == '-297571955'))) or str(update.message.from_user.id) == "384580876":
+            updater.bot.send_message(update.message.chat.id, 'ну хуй знает, ' + update.message.from_user.first_name)
+    elif len(update.message.text)>=30 and (str(update.message.chat.id)=='-388998239' or str(update.message.chat.id) == '-318580374'):
+        date = datetime.datetime.today()
+        date1 = pickle.load(open('dat.bin', 'rb'))
+        if date-date1 >= datetime.timedelta(minutes=3) and rand.random() > 0.85:
 
-    if str(update.message.from_user.id) == '629888988' and str(update.message.chat.id) == '-297571955':
-        updater.bot.send_message(update.message.chat.id, 'ну хуй знает, зуфар')
-    elif (rand.random() > 0.8 and (str(update.message.chat.id) == '-388998239' or str(update.message.chat.id) == '-318580374'or str(update.message.chat.id) == '-388998239')) or str(update.message.chat.id) == "384580876":
-        updater.bot.send_message(update.message.chat.id, 'ну хуй знает, ' + update.message.from_user.first_name)
+            updater.bot.send_message(update.message.chat.id, 'ну такое себе')
+            pickle.dump(date,open('dat.bin', 'wb'))
+
+
 
 def ansno(update, context):
     updater.bot.send_sticker(update.message.chat.id, open('photo-2019-10-29-21-37-37.jpg','rb'))
@@ -70,7 +80,8 @@ class nche(BaseFilter):
 
 class ans(BaseFilter):
     def filter(self, message):
-        return len(message.text)>10 and '?' in message.text
+
+        return len(message.text)>10
 
 def main():
     """Start the bot."""
@@ -79,7 +90,6 @@ def main():
     # Post version 12 this will no longer be necessary
     global updater
     updater = Updater("1008787258:AAE9-_b4wQteEcPfnhBj__orVhf3JDBtGW8", use_context=True)
-
     nuche = nche()
     answ =ans()
     # Get the dispatcher to register handlers
@@ -95,6 +105,7 @@ def main():
     dp.add_handler(CommandHandler("tomorrow", tomorrow))
     dp.add_handler(CommandHandler("week", week))
     dp.add_handler(CommandHandler("nextweek", nextweek))
+
     #dp.add_handler(MessageHandler(Filters.location, loc))
     time.sleep(1)
 
