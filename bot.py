@@ -9,7 +9,7 @@ import datetime
 # Enable logging
 import random as rand
 import list_events as calen
-
+from random import randint
 global pollid
 pollid = {}
 
@@ -52,7 +52,8 @@ def answer(update, context):
 def ansno(update, context):
     updater.bot.send_sticker(update.message.chat.id, open('photo-2019-10-29-21-37-37.jpg','rb'))
 def motiv(update, context):
-    updater.bot.send_video(update.message.chat.id, video=open('video.mp4', 'rb'))
+    i = randint(1,2)
+    updater.bot.send_video(update.message.chat.id, video=open('video'+str(i)+'.mp4', 'rb'))
 def week(update, context):
     if str(update.message.chat.id) =='-297571955' or update.message.chat.id > 0:
         m=calen.week()
